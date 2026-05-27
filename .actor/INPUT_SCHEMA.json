@@ -1,0 +1,106 @@
+{
+  "actorInputSchemaVersion": 1,
+  "title": "Local Lead Enrichment Engine",
+  "description": "Enrich local business leads with domain intelligence, online presence, and review health scores.",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "locationQuery": {
+      "type": "string",
+      "title": "Location",
+      "description": "Free-form query for location, e.g. 'Chennai, India' or 'San Francisco, CA'.",
+      "editor": "textfield",
+      "prefill": "San Francisco, CA"
+    },
+    "radiusMeters": {
+      "type": "integer",
+      "title": "Search radius (meters)",
+      "description": "The search radius for finding candidates around the location query.",
+      "minimum": 100,
+      "default": 5000
+    },
+    "industryKeywords": {
+      "type": "array",
+      "title": "Industry / category keywords",
+      "description": "List of keywords to search for. E.g., ['digital marketing agency', 'dentist'].",
+      "editor": "stringList",
+      "prefill": ["digital marketing agency"],
+      "items": {
+        "type": "string"
+      }
+    },
+    "minReviewRating": {
+      "type": "number",
+      "title": "Minimum review rating",
+      "description": "Filter candidates with review rating greater than or equal to this.",
+      "minimum": 0,
+      "maximum": 5,
+      "default": 0
+    },
+    "minReviewCount": {
+      "type": "integer",
+      "title": "Minimum review count",
+      "description": "Filter candidates with review count greater than or equal to this.",
+      "minimum": 0,
+      "default": 0
+    },
+    "maxBusinesses": {
+      "type": "integer",
+      "title": "Maximum businesses to fetch",
+      "description": "Maximum number of candidate businesses to process.",
+      "minimum": 1,
+      "default": 200
+    },
+    "enableDomainIntelligence": {
+      "type": "boolean",
+      "title": "Enrich domain intelligence (WHOIS, tech stack)",
+      "description": "If enabled, performs WHOIS and tech stack enrichment for business websites.",
+      "default": true
+    },
+    "enableReviewAndSocialChecks": {
+      "type": "boolean",
+      "title": "Enrich review and social presence",
+      "description": "If enabled, searches for review platforms and social media profiles.",
+      "default": true
+    },
+    "googleMapsSourceActorId": {
+      "type": "string",
+      "title": "Local data source Actor ID",
+      "description": "Apify actor ID of a local business / Maps actor (e.g. 'apify/google-maps-scraper' or 'sparkling_yardstick/local-business-data-api').",
+      "editor": "textfield",
+      "default": "apify/google-maps-scraper"
+    },
+    "domainIntelActorId": {
+      "type": "string",
+      "title": "Domain intelligence Actor ID",
+      "description": "Apify actor ID of a domain intelligence scraper (e.g., WHOIS/DNS/tech stack).",
+      "editor": "textfield"
+    },
+    "reviewIntelActorId": {
+      "type": "string",
+      "title": "Review / social intel Actor ID",
+      "description": "Apify actor ID of a review/social profiles scraper.",
+      "editor": "textfield"
+    },
+    "apifyApiToken": {
+      "type": "string",
+      "title": "Apify API token override",
+      "description": "Optional Apify API token override. If empty, uses default token from environment.",
+      "editor": "password"
+    },
+    "proxyConfiguration": {
+      "type": "object",
+      "title": "Proxy configuration",
+      "description": "Proxies used for web requests. Enabled by default.",
+      "editor": "proxy",
+      "default": {
+        "useApifyProxy": true
+      }
+    }
+  },
+  "required": [
+    "locationQuery",
+    "industryKeywords",
+    "googleMapsSourceActorId"
+  ]
+}

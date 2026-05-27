@@ -1,0 +1,45 @@
+{
+  "title": "Local B2B Diagnostics Dataset",
+  "type": "object",
+  "properties": {
+    "business_id": {
+      "type": ["string", "null"],
+      "description": "Identifier of the business being processed"
+    },
+    "website": {
+      "type": ["string", "null"],
+      "description": "Website of the business being processed"
+    },
+    "stage": {
+      "type": ["string", "null"],
+      "enum": ["local_source", "domain_intel", "review_intel"],
+      "description": "The processing stage of the pipeline"
+    },
+    "status": {
+      "type": ["string", "null"],
+      "enum": ["success", "skipped", "error"],
+      "description": "The completion status of the stage"
+    },
+    "error_code": {
+      "type": ["string", "null"],
+      "description": "Categorized error code if failed (e.g. TIMEOUT, API_ERROR, RATE_LIMIT)"
+    },
+    "error_message": {
+      "type": ["string", "null"],
+      "description": "Text description of the error"
+    },
+    "details": {
+      "type": ["string", "null"],
+      "description": "JSON-encoded string or text details for debugging"
+    },
+    "run_id": {
+      "type": ["string", "null"],
+      "description": "Run ID of the Actor run"
+    },
+    "timestamp": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "ISO timestamp when the diagnostic was logged"
+    }
+  }
+}

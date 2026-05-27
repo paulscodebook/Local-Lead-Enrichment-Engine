@@ -1,0 +1,180 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Local Lead Enrichment Engine API",
+    "version": "1.0.0",
+    "description": "API for real-time B2B intelligence enrichment of local leads."
+  },
+  "paths": {
+    "/enrich-local-leads": {
+      "post": {
+        "summary": "Enrich local leads in real-time",
+        "description": "Scrapes and enriches local businesses based on search criteria and runs domain & social intelligence checks in a real-time request-response loop.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EnrichInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully enriched leads and diagnostics",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnrichResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input parameters"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "EnrichInput": {
+        "type": "object",
+        "required": ["locationQuery", "industryKeywords"],
+        "properties": {
+          "locationQuery": {
+            "type": "string",
+            "title": "Location",
+            "description": "Free-form query for location, e.g. 'Chennai, India' or 'San Francisco, CA'."
+          },
+          "industryKeywords": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "title": "Industry / category keywords"
+          },
+          "radiusMeters": {
+            "type": "integer",
+            "minimum": 100,
+            "default": 5000,
+            "title": "Search radius (meters)"
+          },
+          "minReviewRating": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 5,
+            "default": 0,
+            "title": "Minimum review rating"
+          },
+          "minReviewCount": {
+            "type": "integer",
+            "minimum": 0,
+            "default": 0,
+            "title": "Minimum review count"
+          },
+          "maxBusinesses": {
+            "type": "integer",
+            "minimum": 1,
+            "default": 10,
+            "title": "Maximum businesses to fetch"
+          },
+          "enableDomainIntelligence": {
+            "type": "boolean",
+            "default": true,
+            "title": "Enrich domain intelligence"
+          },
+          "enableReviewAndSocialChecks": {
+            "type": "boolean",
+            "default": true,
+            "title": "Enrich review and social presence"
+          },
+          "googleMapsSourceActorId": {
+            "type": "string",
+            "title": "Local data source Actor ID",
+            "description": "Apify actor ID of a local business / Maps actor (e.g. 'apify/google-maps-scraper' or 'sparkling_yardstick/local-business-data-api')."
+          },
+          "domainIntelActorId": {
+            "type": "string",
+            "title": "Domain intelligence Actor ID"
+          },
+          "reviewIntelActorId": {
+            "type": "string",
+            "title": "Review / social intel Actor ID"
+          },
+          "apifyApiToken": {
+            "type": "string",
+            "title": "Apify API token override",
+            "format": "password"
+          }
+        }
+      },
+      "EnrichResponse": {
+        "type": "object",
+        "properties": {
+          "enrichedBusinesses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EnrichedBusiness"
+            }
+          },
+          "diagnostics": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DiagnosticRecord"
+            }
+          }
+        }
+      },
+      "EnrichedBusiness": {
+        "type": "object",
+        "properties": {
+          "business_id": { "type": "string", "nullable": true },
+          "name": { "type": "string", "nullable": true },
+          "formatted_address": { "type": "string", "nullable": true },
+          "latitude": { "type": "number", "nullable": true },
+          "longitude": { "type": "number", "nullable": true },
+          "phone": { "type": "string", "nullable": true },
+          "website": { "type": "string", "nullable": true },
+          "email": { "type": "string", "nullable": true },
+          "primary_social_profile": { "type": "string", "nullable": true },
+          "rating": { "type": "number", "nullable": true },
+          "review_count": { "type": "integer", "nullable": true },
+          "review_platforms": { "type": "array", "items": { "type": "string" }, "nullable": true },
+          "domain": { "type": "string", "nullable": true },
+          "registrar": { "type": "string", "nullable": true },
+          "domain_age_days": { "type": "integer", "nullable": true },
+          "domain_created_at": { "type": "string", "format": "date-time", "nullable": true },
+          "dns_records_summary": { "type": "string", "nullable": true },
+          "tech_stack": { "type": "array", "items": { "type": "string" }, "nullable": true },
+          "online_presence_score": { "type": "number", "nullable": true },
+          "review_health_score": { "type": "number", "nullable": true },
+          "lead_quality_score": { "type": "number", "nullable": true },
+          "source_actor_run_id": { "type": "string", "nullable": true },
+          "enriched_at": { "type": "string", "format": "date-time", "nullable": true },
+          "location_query": { "type": "string", "nullable": true },
+          "industry_keywords": { "type": "array", "items": { "type": "string" }, "nullable": true }
+        }
+      },
+      "DiagnosticRecord": {
+        "type": "object",
+        "properties": {
+          "business_id": { "type": "string", "nullable": true },
+          "website": { "type": "string", "nullable": true },
+          "stage": { "type": "string", "enum": ["local_source", "domain_intel", "review_intel"], "nullable": true },
+          "status": { "type": "string", "enum": ["success", "skipped", "error"], "nullable": true },
+          "error_code": { "type": "string", "nullable": true },
+          "error_message": { "type": "string", "nullable": true },
+          "details": { "type": "string", "nullable": true },
+          "run_id": { "type": "string", "nullable": true },
+          "timestamp": { "type": "string", "format": "date-time", "nullable": true }
+        }
+      }
+    }
+  }
+}

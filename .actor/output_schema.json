@@ -1,0 +1,18 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "Output schema of the Local Lead Enrichment Engine",
+  "properties": {
+    "enrichedBusinessesUrl": {
+      "type": "string",
+      "title": "Enriched Businesses",
+      "description": "The dataset containing enriched business leads with domain intelligence, review health, and lead quality scores.",
+      "template": "{{storages.datasets.default.apiUrl}}/items"
+    },
+    "diagnosticsUrl": {
+      "type": "string",
+      "title": "Diagnostics and Errors",
+      "description": "The diagnostics dataset containing execution logs, stage summaries, and error logs per business.",
+      "template": "{{storages.datasets.diagnostics.apiUrl}}/items"
+    }
+  }
+}

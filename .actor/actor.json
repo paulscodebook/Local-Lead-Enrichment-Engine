@@ -1,0 +1,17 @@
+{
+  "actorSpecification": 1,
+  "name": "local-lead-enrichment-engine",
+  "title": "Local Lead Enrichment Engine",
+  "description": "Enrich local business leads with domain intelligence, online presence, and review health scores.",
+  "version": "1.0.0",
+  "dockerfile": "./Dockerfile",
+  "usesStandbyMode": true,
+  "webServerSchema": "./web_server_schema.json",
+  "storages": {
+    "datasets": {
+      "default": "./dataset_enriched_businesses_schema.json",
+      "diagnostics": "./dataset_diagnostics_schema.json"
+    }
+  },
+  "output": "./output_schema.json"
+}
