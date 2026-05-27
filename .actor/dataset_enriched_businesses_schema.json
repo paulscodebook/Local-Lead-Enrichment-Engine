@@ -1,123 +1,126 @@
 {
-  "title": "Local B2B Enriched Businesses Dataset",
-  "type": "object",
-  "properties": {
-    "business_id": {
-      "type": ["string", "null"],
-      "description": "Stable ID from local source (e.g. Maps place_id)"
-    },
-    "name": {
-      "type": ["string", "null"],
-      "description": "Name of the business"
-    },
-    "formatted_address": {
-      "type": ["string", "null"],
-      "description": "Physical address"
-    },
-    "latitude": {
-      "type": ["number", "null"],
-      "description": "Geographic latitude coordinate"
-    },
-    "longitude": {
-      "type": ["number", "null"],
-      "description": "Geographic longitude coordinate"
-    },
-    "phone": {
-      "type": ["string", "null"],
-      "description": "Phone number"
-    },
-    "website": {
-      "type": ["string", "null"],
-      "description": "Business website URL"
-    },
-    "email": {
-      "type": ["string", "null"],
-      "description": "Found business contact email"
-    },
-    "primary_social_profile": {
-      "type": ["string", "null"],
-      "description": "Main social media profile link (e.g., LinkedIn or Facebook)"
-    },
-    "rating": {
-      "type": ["number", "null"],
-      "description": "Review rating (0 to 5) from maps source"
-    },
-    "review_count": {
-      "type": ["integer", "null"],
-      "description": "Number of reviews on maps source"
-    },
-    "review_platforms": {
-      "type": ["array", "null"],
-      "items": {
-        "type": "string"
+  "actorSpecification": 1,
+  "title": "Local Lead Enriched Businesses Dataset",
+  "fields": {
+    "type": "object",
+    "properties": {
+      "business_id": {
+        "type": ["string", "null"],
+        "description": "Stable ID from local source (e.g. Maps place_id)"
       },
-      "description": "List of review platforms where this business is present (e.g., ['google', 'yelp'])"
-    },
-    "domain": {
-      "type": ["string", "null"],
-      "description": "The base domain extracted from the website URL"
-    },
-    "registrar": {
-      "type": ["string", "null"],
-      "description": "WHOIS registrar name"
-    },
-    "domain_age_days": {
-      "type": ["integer", "null"],
-      "description": "Age of domain in days"
-    },
-    "domain_created_at": {
-      "type": ["string", "null"],
-      "format": "date-time",
-      "description": "Creation timestamp of domain (ISO format)"
-    },
-    "dns_records_summary": {
-      "type": ["string", "null"],
-      "description": "Summary of DNS records (A, MX, TXT)"
-    },
-    "tech_stack": {
-      "type": ["array", "null"],
-      "items": {
-        "type": "string"
+      "name": {
+        "type": ["string", "null"],
+        "description": "Name of the business"
       },
-      "description": "Detected technologies on the website (e.g., WordPress, Shopify, Google Analytics)"
-    },
-    "online_presence_score": {
-      "type": ["number", "null"],
-      "minimum": 0,
-      "maximum": 100,
-      "description": "Computed score (0-100) representing strength of online profiles and website"
-    },
-    "review_health_score": {
-      "type": ["number", "null"],
-      "minimum": 0,
-      "maximum": 100,
-      "description": "Computed score (0-100) based on review rating, volume, and platform diversity"
-    },
-    "lead_quality_score": {
-      "type": ["number", "null"],
-      "minimum": 0,
-      "maximum": 100,
-      "description": "Deterministic scoring combining online presence, review health, domain age, and tech stack"
-    },
-    "source_actor_run_id": {
-      "type": ["string", "null"],
-      "description": "Run ID of the local-data maps actor"
-    },
-    "enriched_at": {
-      "type": ["string", "null"],
-      "format": "date-time",
-      "description": "ISO timestamp when the enrichment occurred"
-    },
-    "location_query": {
-      "type": ["string", "null"],
-      "description": "Location query used to discover this lead"
-    },
-    "industry_keywords": {
-      "type": ["array", "null"],
-      "items": {
-        "type": "string"
+      "formatted_address": {
+        "type": ["string", "null"],
+        "description": "Physical address"
       },
-      "description": "Keywords used to discover this lead"
+      "latitude": {
+        "type": ["number", "null"],
+        "description": "Geographic latitude coordinate"
+      },
+      "longitude": {
+        "type": ["number", "null"],
+        "description": "Geographic longitude coordinate"
+      },
+      "phone": {
+        "type": ["string", "null"],
+        "description": "Phone number"
+      },
+      "website": {
+        "type": ["string", "null"],
+        "description": "Business website URL"
+      },
+      "email": {
+        "type": ["string", "null"],
+        "description": "Found business contact email"
+      },
+      "primary_social_profile": {
+        "type": ["string", "null"],
+        "description": "Main social media profile link (e.g., LinkedIn or Facebook)"
+      },
+      "rating": {
+        "type": ["number", "null"],
+        "description": "Review rating (0 to 5) from maps source"
+      },
+      "review_count": {
+        "type": ["integer", "null"],
+        "description": "Number of reviews on maps source"
+      },
+      "review_platforms": {
+        "type": ["array", "null"],
+        "items": {
+          "type": "string"
+        },
+        "description": "List of review platforms where this business is present (e.g., ['google', 'yelp'])"
+      },
+      "domain": {
+        "type": ["string", "null"],
+        "description": "The base domain extracted from the website URL"
+      },
+      "registrar": {
+        "type": ["string", "null"],
+        "description": "WHOIS registrar name"
+      },
+      "domain_age_days": {
+        "type": ["integer", "null"],
+        "description": "Age of domain in days"
+      },
+      "domain_created_at": {
+        "type": ["string", "null"],
+        "format": "date-time",
+        "description": "Creation timestamp of domain (ISO format)"
+      },
+      "dns_records_summary": {
+        "type": ["string", "null"],
+        "description": "Summary of DNS records (A, MX, TXT)"
+      },
+      "tech_stack": {
+        "type": ["array", "null"],
+        "items": {
+          "type": "string"
+        },
+        "description": "Detected technologies on the website (e.g., WordPress, Shopify, Google Analytics)"
+      },
+      "online_presence_score": {
+        "type": ["number", "null"],
+        "minimum": 0,
+        "maximum": 100,
+        "description": "Computed score (0-100) representing strength of online profiles and website"
+      },
+      "review_health_score": {
+        "type": ["number", "null"],
+        "minimum": 0,
+        "maximum": 100,
+        "description": "Computed score (0-100) based on review rating, volume, and platform diversity"
+      },
+      "lead_quality_score": {
+        "type": ["number", "null"],
+        "minimum": 0,
+        "maximum": 100,
+        "description": "Deterministic scoring combining online presence, review health, domain age, and tech stack"
+      },
+      "source_actor_run_id": {
+        "type": ["string", "null"],
+        "description": "Run ID of the local-data maps actor"
+      },
+      "enriched_at": {
+        "type": ["string", "null"],
+        "format": "date-time",
+        "description": "ISO timestamp when the enrichment occurred"
+      },
+      "location_query": {
+        "type": ["string", "null"],
+        "description": "Location query used to discover this lead"
+      },
+      "industry_keywords": {
+        "type": ["array", "null"],
+        "items": {
+          "type": "string"
+        },
+        "description": "Keywords used to discover this lead"
+      }
     }
   }
 }
