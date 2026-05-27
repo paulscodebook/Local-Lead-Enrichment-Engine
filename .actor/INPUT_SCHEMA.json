@@ -1,5 +1,4 @@
 {
-  "actorInputSchemaVersion": 1,
   "title": "Local Lead Enrichment Engine",
   "description": "Enrich local business leads with domain intelligence, online presence, and review health scores.",
   "type": "object",
