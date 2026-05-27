@@ -85,7 +85,8 @@
       "type": "string",
       "title": "Apify API token override",
       "description": "Optional Apify API token override. If empty, uses default token from environment.",
-      "editor": "password"
+      "editor": "textfield",
+      "isSecret": true
     },
     "proxyConfiguration": {
       "type": "object",
